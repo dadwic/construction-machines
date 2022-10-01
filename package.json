@@ -20,7 +20,7 @@
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "latest",
     "@reduxjs/toolkit": "^1.8.5",
-    "next": "^12.2.5",
+    "next": "latest",
     "notistack": "^2.0.5",
     "nprogress": "^0.2.0",
     "react": "latest",

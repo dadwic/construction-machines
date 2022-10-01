@@ -18,8 +18,9 @@ import "assets/nprogress.css";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-interface MyAppProps extends AppProps {
+interface MyAppProps extends Omit<AppProps, "pageProps"> {
   emotionCache?: EmotionCache;
+  pageProps: any;
 }
 
 export default function MyApp(props: MyAppProps) {
