@@ -13,10 +13,12 @@ const customJestConfig = {
     "^components/(.*)$": "<rootDir>/components/$1",
     "^constants/(.*)$": "<rootDir>/constants/$1",
     "^interfaces": "<rootDir>/interfaces",
+    "^models/(.*)$": "<rootDir>/models/$1",
     "^assets/(.*)$": "<rootDir>/assets/$1",
     "^pages/(.*)$": "<rootDir>/pages/$1",
     "^utils/(.*)$": "<rootDir>/utils/$1",
     "^hooks/(.*)$": "<rootDir>/hooks/$1",
+    "^lib/(.*)$": "<rootDir>/lib/$1",
   },
   testEnvironment: "jest-environment-jsdom",
 };
