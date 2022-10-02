@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
+import CustomerAsset from "models/CustomerAsset";
 import dbConnect from "lib/dbConnect";
-import Machine from "models/Machine";
 
 export default async function handler(req: Request, res: Response) {
   const { method } = req;
@@ -10,7 +10,7 @@ export default async function handler(req: Request, res: Response) {
   switch (method) {
     case "GET":
       try {
-        const data = await Machine.find(
+        const data = await CustomerAsset.find(
           {}
         ); /* find all the data in our database */
         res.status(200).json({ success: true, data });
@@ -20,7 +20,7 @@ export default async function handler(req: Request, res: Response) {
       break;
     case "POST":
       try {
-        const data = await Machine.create(
+        const data = await CustomerAsset.create(
           req.body
         ); /* create a new model in the database */
         res.status(201).json({ success: true, data });
