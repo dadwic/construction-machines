@@ -17,10 +17,12 @@
     "jsxImportSource": "@emotion/react",
     "incremental": true,
     "paths": {
+      "lib/*": ["lib/*"],
       "hooks/*": ["hooks/*"],
       "utils/*": ["utils/*"],
       "pages/*": ["pages/*"],
       "assets/*": ["assets/*"],
+      "models/*": ["models/*"],
       "interfaces": ["interfaces"],
       "constants/*": ["constants/*"],
       "components/*": ["components/*"]
