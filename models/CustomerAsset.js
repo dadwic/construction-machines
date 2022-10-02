@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-/* PetSchema will correspond to a collection in your MongoDB database. */
-const MachineSchema = new mongoose.Schema({
+/* CustomerAssetSchema will correspond to a collection in your MongoDB database. */
+const CustomerAssetSchema = new mongoose.Schema({
   id: {
     type: Number,
     required: [true, "Please provide an id for this machine."],
@@ -35,5 +35,5 @@ const MachineSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.Machine ||
-  mongoose.model("Machine", MachineSchema);
+export default mongoose.models.CustomerAsset ||
+  mongoose.model("CustomerAsset", CustomerAssetSchema);

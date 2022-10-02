@@ -1,5 +1,7 @@
 import React from "react";
+import useSwr from "swr";
 import dynamic from "next/dynamic";
+import type { ApiResponse, State } from "interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { styled, Theme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -8,6 +10,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
+import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -19,11 +22,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./listItems";
 import Unauthorized from "./Unauthorized";
-import Deposits from "./Deposits";
-import Orders from "./Orders";
 import Footer from "components/Footer";
+import Customers from "./Customers";
+import Machines from "./Machines";
+import { fetcher } from "utils/index";
 import { logout } from "hooks/store";
-import { State } from "interfaces";
 
 const Chart = dynamic(() => import("./Chart"), {
   ssr: false,
@@ -84,6 +87,7 @@ export default function Dashboard() {
   const email = useSelector((state: State) => state.email);
   const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const [open, setOpen] = React.useState(true);
+  const { data, error } = useSwr<ApiResponse>("/api/customers-asset", fetcher);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -170,8 +174,12 @@ export default function Dashboard() {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography variant="h6">Logged in as {email}</Typography>
+              {((data && !data.success) || error) && (
+                <Alert severity="error" variant="filled" sx={{ mt: 1 }}>
+                  Failed to load data!
+                </Alert>
+              )}
             </Grid>
-            {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper
                 sx={{
@@ -185,7 +193,6 @@ export default function Dashboard() {
                 <Chart />
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper
                 sx={{
@@ -195,13 +202,19 @@ export default function Dashboard() {
                   height: 240,
                 }}
               >
-                <Deposits />
+                <Machines />
               </Paper>
             </Grid>
-            {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <Orders />
+              <Paper
+                sx={{
+                  p: 2,
+                  height: 750,
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Customers data={data} />
               </Paper>
             </Grid>
           </Grid>
