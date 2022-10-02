@@ -24,8 +24,9 @@ export default function Footer() {
         <Link
           color="inherit"
           target="_blank"
-          href="https://github.com/dadwic"
+          href="https://github.com/dadwic/construction-machines"
           rel="noopener noreferrer"
+          sx={{ textDecoration: "underline" }}
         >
           @dadwic
         </Link>
